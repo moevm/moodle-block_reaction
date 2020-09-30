@@ -1,0 +1,137 @@
+.plugin-wrapper {
+    padding: 0;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.likes-dislikes-plugin-ui {
+    position: relative;
+
+    width: 250px;
+    height: 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.likes-dislikes-plugin-ui label {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 80%;
+    color: rgba(191, 191, 191, 0.75);
+
+    position: absolute;
+
+    width: 40%;
+    height: 20%;
+
+    display: flex;
+    align-content: center;
+
+    transition: color 0.3s;
+}
+
+label[for="like"] {
+    left: 3%;
+    top: 2%;
+
+    justify-content: right;
+}
+
+label[for="dislike"] {
+    right: 3%;
+    bottom: 2%;
+
+    justify-content: left;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+
+    margin: 1px;
+    padding: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+
+#like {
+    border-bottom: 15px solid rgba(191, 191, 191, 0.75);
+    transition: border-bottom-color 0.3s;
+}
+
+#like:hover {
+    border-bottom-color: rgba(144, 238, 144, 0.75);
+}
+
+#like:hover + label {
+    color: rgba(144, 238, 144, 0.75);
+}
+
+#like:checked {
+    border-bottom-color: rgba(144, 238, 144, 1);
+}
+
+#like:checked + label{
+    color: rgba(144, 238, 144, 1);
+}
+
+#dislike {
+    border-top: 15px solid rgba(191, 191, 191, 0.75);
+    transition: border-top-color 0.5s;
+}
+
+#dislike:hover {
+    border-top-color: rgba(205, 92, 92, 0.75);
+}
+
+#dislike:hover + label {
+    color: rgba(205, 92, 92, 0.75);;
+}
+
+#dislike:checked {
+    border-top-color: rgba(205, 92, 92, 1);;
+}
+
+#dislike:checked + label{
+    color: rgba(205, 92, 92, 1);
+}
+
+.bar-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+
+    width: 0;
+    /*width: 80%;*/
+    margin: 0.3%;
+
+    transition: width 0.3s;
+}
+
+.likes-dislikes-plugin-ui:hover>.bar-wrapper {
+    width: 80%;
+}
+
+.bar-wrapper span {
+    display: block;
+}
+
+.bar {
+    background-color: rgba(205, 92, 92, 1);
+}
+
+.bar-likes {
+    background: rgba(144, 238, 144, 1);
+    /*bar height*/
+    padding: 1%;
+    width: 45%;
+}
