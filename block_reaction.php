@@ -45,7 +45,17 @@ class block_reaction extends block_base {
         $this->content         =  new stdClass;
         $this->content->text   = 'The content of our SimpleHTML block!';
         $this->content->footer = 'Footer here...';
+        
+        $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init');
+        $this->page->requires->css('/blocks/reaction/style.css');
+        $this->page->requires->js('/blocks/reaction/script.js');
     
         return $this->content;
+    }
+    
+    public function applicable_formats() {
+        return array(
+            'mod' => true
+        );
     }
 }

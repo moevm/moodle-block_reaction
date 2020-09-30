@@ -1,0 +1,6 @@
+{
+  "sourceMap": {
+    "root": "../src",
+    "url": "{file}.map"
+  }
+}
