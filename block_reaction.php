@@ -33,28 +33,42 @@ class block_reaction extends block_base {
      */
     public function init() {
 
-        $this->title = 'Hello World';
+        $this->title = get_string('pluginname', 'block_reaction');
 
     }
     
     public function get_content() {
+        global $USER, $COURSE;
+    
         if ($this->content !== null) {
             return $this->content;
         }
     
-        $this->content         =  new stdClass;
-        $this->content->text   = 'The content of our SimpleHTML block!';
-        $this->content->footer = 'Footer here...';
+        $this->content = new stdClass;
+        if ($this->page->user_is_editing()) {
+            $this->content->text = 'The content of our SimpleHTML block!';
+        }
         
-        $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init');
-        $this->page->requires->css('/blocks/reaction/style.css');
-        $this->page->requires->js('/blocks/reaction/script.js');
+        $envconf = array(
+                    'user' => $USER,
+                    'course' => $COURSE,
+                    'mod_id' => $this->page->cm->id
+                );
+
+        $paramsamd = array($envconf);
+        
+        if (!is_null($this->page->cm)) {
+            $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
+            $this->page->requires->css('/blocks/reaction/style.css');
+            $this->page->requires->js('/blocks/reaction/script.js');
+        }
     
         return $this->content;
     }
     
     public function applicable_formats() {
         return array(
+            'course-view' => true,
             'mod' => true
         );
     }
