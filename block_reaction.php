@@ -49,18 +49,18 @@ class block_reaction extends block_base {
             $this->content->text = 'The content of our SimpleHTML block!';
         }
         
-        $dbdatum = new stdClass();
-        $dbdatum->userid = 5;
-        $dbdatum->moduleid = 7;
-        $dbdatum->reaction = 1;
-        
-        $DB->insert_record('reactions', $dbdatum);
+//         $dbdatum = new stdClass();
+//         $dbdatum->userid = 5;
+//         $dbdatum->moduleid = 7;
+//         $dbdatum->reaction = 1;
+//         
+//         $DB->insert_record('reactions', $dbdatum);
         
         $envconf = array(
                     'user' => $USER,
                     'course' => $COURSE,
                     'mod_id' => $this->page->cm->id,
-                    'db_datum' => $DB->get_record('reactions', ['userid' => 5, 'moduleid' => 7])
+//                     'db_datum' => $DB->get_record('reactions', ['userid' => 5, 'moduleid' => 7])
                 );
 
         $paramsamd = array($envconf);
