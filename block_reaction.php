@@ -33,28 +33,50 @@ class block_reaction extends block_base {
      */
     public function init() {
 
-        $this->title = 'Hello World';
+        $this->title = get_string('pluginname', 'block_reaction');
 
     }
     
     public function get_content() {
+        global $USER, $COURSE, $DB;
+    
         if ($this->content !== null) {
             return $this->content;
         }
     
-        $this->content         =  new stdClass;
-        $this->content->text   = 'The content of our SimpleHTML block!';
-        $this->content->footer = 'Footer here...';
+        $this->content = new stdClass;
+        if ($this->page->user_is_editing()) {
+            $this->content->text = 'The content of our SimpleHTML block!';
+        }
         
-        $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init');
-        $this->page->requires->css('/blocks/reaction/style.css');
-        $this->page->requires->js('/blocks/reaction/script.js');
+//         $dbdatum = new stdClass();
+//         $dbdatum->userid = 5;
+//         $dbdatum->moduleid = 7;
+//         $dbdatum->reaction = 1;
+//         
+//         $DB->insert_record('reactions', $dbdatum);
+        
+        $envconf = array(
+                    'user' => $USER,
+                    'course' => $COURSE,
+                    'mod_id' => $this->page->cm->id,
+//                     'db_datum' => $DB->get_record('reactions', ['userid' => 5, 'moduleid' => 7])
+                );
+
+        $paramsamd = array($envconf);
+        
+        if (!is_null($this->page->cm)) {
+            $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
+            $this->page->requires->css('/blocks/reaction/style.css');
+            $this->page->requires->js('/blocks/reaction/script.js');
+        }
     
         return $this->content;
     }
     
     public function applicable_formats() {
         return array(
+            'course-view' => true,
             'mod' => true
         );
     }

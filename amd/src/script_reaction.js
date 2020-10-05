@@ -1,6 +1,7 @@
 define('block_reaction/script_reaction', ['jquery'], function($) {
     return {
-        init: function() {
+        init: function(env) {
+            console.log(env)
             /* include stylesheet */
             $('head').append('<link rel="stylesheet" type="text/css" href="style.css">');
 
