@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+require_once($CFG->libdir . '/externallib.php');
+
 /**
  * Reaction block
  *
@@ -55,11 +57,22 @@ class block_reaction extends block_base {
 //         $dbdatum->reaction = 1;
 //         
 //         $DB->insert_record('reactions', $dbdatum);
+
+        //check if the service exists and is enabled
+        $service = $DB->get_record('external_services', array('shortname' => 'rs', 'enabled' => 1));
+        if (empty($service)) {
+            // will throw exception if no token found
+            throw new moodle_exception('servicenotavailable', 'webservice');
+        }
+
+        // Get an existing token or create a new one.
+        $token = external_generate_token_for_current_user($service);
         
         $envconf = array(
                     'user' => $USER,
                     'course' => $COURSE,
                     'mod_id' => $this->page->cm->id,
+                    'token' => $token
 //                     'db_datum' => $DB->get_record('reactions', ['userid' => 5, 'moduleid' => 7])
                 );
 
