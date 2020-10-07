@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
 
 /**
  * Reaction block
@@ -48,15 +49,8 @@ class block_reaction extends block_base {
     
         $this->content = new stdClass;
         if ($this->page->user_is_editing()) {
-            $this->content->text = 'The content of our SimpleHTML block!';
+            $this->content->text = get_string('service_name', 'block_reaction');
         }
-        
-//         $dbdatum = new stdClass();
-//         $dbdatum->userid = 5;
-//         $dbdatum->moduleid = 7;
-//         $dbdatum->reaction = 1;
-//         
-//         $DB->insert_record('reactions', $dbdatum);
 
         //check if the service exists and is enabled
         $service = $DB->get_record('external_services', array('shortname' => 'rs', 'enabled' => 1));
@@ -67,13 +61,16 @@ class block_reaction extends block_base {
 
         // Get an existing token or create a new one.
         $token = external_generate_token_for_current_user($service);
+        $user_reaction = mse_ld_services::get_reaction($this->page->cm->id);
+        $total_reaction = mse_ld_services::get_total_reaction($this->page->cm->id);
         
         $envconf = array(
                     'user' => $USER,
                     'course' => $COURSE,
                     'mod_id' => $this->page->cm->id,
-                    'token' => $token
-//                     'db_datum' => $DB->get_record('reactions', ['userid' => 5, 'moduleid' => 7])
+                    'token' => $token,
+                    'user_reaction' => $user_reaction,
+                    'total_reaction' => $total_reaction
                 );
 
         $paramsamd = array($envconf);
