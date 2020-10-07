@@ -20,48 +20,93 @@
  * @copyright  2011 Moodle Pty Ltd (http://moodle.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+ 
+ require_once($CFG->libdir . '/externallib.php');
 
-class mse_ld_services external_api {
-/*
-    /**
-     * Returns description of method parameters
-     * @return external_function_parameters
-     */
+class mse_ld_services extends external_api {
+
     public static function set_reaction_parameters() {
         return new external_function_parameters(
-                array('moduleid' => new external_value(PARAM_TEXT, 'Сourse id to which section will be added.'))
+                array(
+                'moduleid' => new external_value(PARAM_INT, 'Id of module to add reaction'),
+                'reaction' => new external_value(PARAM_INT, 'reaction. 0 - dislike, 1 - like, 2 - undefined')
+                ),
         );
     }
 
-    /**
-     * Returns welcome message
-     * @return string welcome message
-     */
-    public static function set_reaction($moduleid) {
+    public static function set_reaction($moduleid, $reaction) {
+        
+        global $USER;
+        global $DB;
+    
+        if ($reaction < 2) {
+            if ($DB->record_exists('reactions', ['userid' => $USER->id, 'moduleid' => $moduleid])) {
+                $DB->set_field('reactions', 'reaction', $reaction, ['userid' => $USER->id, 'moduleid' => $moduleid]);
+            } else {
+                $reactionDatum = new stdClass();
+                $reactionDatum->moduleid   = $moduleid;
+                $reactionDatum->userid  = $USER->id;
+                $reactionDatum->reaction  = $reaction;
+                $reactionDatum->id = $DB->insert_record("reactions", $reactionDatum);
+            }
+        } else {
+            $DB->delete_records('reactions', ['userid' => $USER->id, 'moduleid' => $moduleid]);
+        }
+
+        return true;
+    }
+
+    public static function set_reaction_returns() {
+        return  new external_value(PARAM_BOOL, 'True if setting succesfull');
+    }
+    
+    public static function get_reaction_parameters() {
+        return new external_function_parameters(
+                array('moduleid' => new external_value(PARAM_INT, 'Id of module to get reaction'))
+        );
+    }
+
+    public static function get_reaction($moduleid) {
         
         global $USER;
         global $DB;
 
-        /*First add section to the end.*/
-        $reaction = new stdClass();
-        $reaction->moduleid   = $courseid;
-        $reaction->userid  = $USER->id;
+        $reactionDatum = $DB->get_record("reactions", ['userid' => $USER->id, 'moduleid' => $moduleid]);
+        
+        if ($reactionDatum) {
+            return $reactionDatum->reaction;
+        } else {
+            return 2;
+        }
+    }
 
-        $reaction->id = $DB->insert_record("reactions", $reaction);
+    public static function get_reaction_returns() {
+        return new external_value(PARAM_INT, 'reaction. 0 - dislike, 1 - like, 2 - undefined');
+    }
+    
+    public static function get_total_reaction_parameters() {
+        return new external_function_parameters(
+                array('moduleid' => new external_value(PARAM_INT, 'Сourse id to which section will be added.'))
+        );
+    }
+
+    public static function get_total_reaction($moduleid) {
+        
+        global $USER;
+        global $DB;
+
+        $reaction = new stdClass();
+        $reaction->likes = $DB->count_records('reactions', ['moduleid' => $moduleid, 'reaction' => true]);
+        $reaction->dislikes = $DB->count_records('reactions', ['moduleid' => $moduleid, 'reaction' => false]);
 
         return $reaction;
     }
 
-    /**
-     * Returns description of method result value
-     * @return external_description
-     */
-    public static function set_reaction_returns() {
+    public static function get_total_reaction_returns() {
         return  new external_single_structure(
             array(
-                'id' => new external_value(PARAM_INT, 'reaction id'),
-                'moduleid' => new external_value(PARAM_INT, 'module id'),
-                'userid' => new external_value(PARAM_TEXT, 'user id'),
+                'likes' => new external_value(PARAM_INT, 'Likes count'),
+                'dislikes' => new external_value(PARAM_INT, 'Dislikes count')
             )
         );
     }
