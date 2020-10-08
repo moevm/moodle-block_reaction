@@ -49,13 +49,12 @@ class block_reaction extends block_base {
     
         $this->content = new stdClass;
         if ($this->page->user_is_editing()) {
-            $this->content->text = 'Used service: mse_ld';
-            $this->content->text .= 'Course: ' . $COURSE->id;
+            $this->content->text .= 'Course: ' . $COURSE->id . '<br>';
             $this->content->text .= 'User: ' . $USER->id;
         }
 
         //check if the service exists and is enabled
-        $service = $DB->get_record('external_services', array('shortname' => 'mse_ld', 'enabled' => 1));
+        $service = $DB->get_record('external_services', array('shortname' => MOODLE_OFFICIAL_MOBILE_SERVICE, 'enabled' => 1));
         if (empty($service)) {
             // will throw exception if no token found
             throw new moodle_exception('servicenotavailable', 'webservice');
