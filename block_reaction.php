@@ -14,6 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
+
 /**
  * Reaction block
  *
@@ -46,21 +49,18 @@ class block_reaction extends block_base {
     
         $this->content = new stdClass;
         if ($this->page->user_is_editing()) {
-            $this->content->text = 'The content of our SimpleHTML block!';
+            $this->content->text .= 'User: ' . $USER->id . '<br>';
+            $this->content->text .= 'Course: ' . $COURSE->id . '<br>';
+            $this->content->text .= 'Module: ' . $this->page->cm->id . '<br>';
         }
-        
-//         $dbdatum = new stdClass();
-//         $dbdatum->userid = 5;
-//         $dbdatum->moduleid = 7;
-//         $dbdatum->reaction = 1;
-//         
-//         $DB->insert_record('reactions', $dbdatum);
+
+        $user_reaction = mse_ld_services::get_reaction($this->page->cm->id);
+        $total_reaction = mse_ld_services::get_total_reaction($this->page->cm->id);
         
         $envconf = array(
-                    'user' => $USER,
-                    'course' => $COURSE,
                     'mod_id' => $this->page->cm->id,
-//                     'db_datum' => $DB->get_record('reactions', ['userid' => 5, 'moduleid' => 7])
+                    'user_reaction' => $user_reaction,
+                    'total_reaction' => $total_reaction
                 );
 
         $paramsamd = array($envconf);
