@@ -59,7 +59,6 @@ class block_reaction extends block_base {
         
         $envconf = array(
                     'mod_id' => $this->page->cm->id,
-                    'token' => $token->token,
                     'user_reaction' => $user_reaction,
                     'total_reaction' => $total_reaction
                 );
