@@ -29,6 +29,7 @@ $functions = array(
                 'classpath'   => 'blocks/reaction/externallib.php',
                 'description' => 'Set user reaction for activity.',
                 'type'        => 'write',
+                'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
         ),
         'mse_ld_get_reaction' => array(
@@ -37,6 +38,7 @@ $functions = array(
                 'classpath'   => 'blocks/reaction/externallib.php',
                 'description' => 'Return user reaction for activity',
                 'type'        => 'write',
+                'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
         ),
         'mse_ld_get_total_reaction' => array(
@@ -45,6 +47,7 @@ $functions = array(
                 'classpath'   => 'blocks/reaction/externallib.php',
                 'description' => 'Return all users reaction for activity.',
                 'type'        => 'write',
+                'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
         )
 );

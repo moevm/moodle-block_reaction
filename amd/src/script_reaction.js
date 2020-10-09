@@ -1,4 +1,4 @@
-define('block_reaction/script_reaction', ['jquery'], function($) {
+define('block_reaction/script_reaction', ['jquery', 'core/ajax'], function($, ajax) {
     return {
         init: function(env) {
             console.log(env)
@@ -42,6 +42,21 @@ define('block_reaction/script_reaction', ['jquery'], function($) {
                 ui.append(dislikeLabel);
 
                 $('div[role="main"]').append(wrapper);
+                
+                urPromise = ajax.call([{
+                    methodname: 'mse_ld_get_reaction',
+                    args: {
+                        moduleid: env.mod_id
+                    }
+                }])
+                $.when(urPromise[0]).done((answ) => console.log('User reaction: ', answ))
+                trPromise = ajax.call([{
+                    methodname: 'mse_ld_get_total_reaction',
+                    args: {
+                        moduleid: env.mod_id
+                    }
+                }])
+                $.when(trPromise[0]).done((answ) => console.log('Total reaction: ', answ))
             });
         }
     }
