@@ -1,9 +1,10 @@
+/* PLUGIN STYLES */
 .plugin-wrapper {
     padding: 0;
     margin-top: 20px;
 
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -40,14 +41,14 @@ label[for="like"] {
     left: 3%;
     top: 2%;
 
-    justify-content: right;
+    justify-content: flex-end;
 }
 
 label[for="dislike"] {
     right: 3%;
     bottom: 2%;
 
-    justify-content: left;
+    justify-content: flex-start;
 }
 
 input[type="checkbox"] {
@@ -135,3 +136,193 @@ input[type="checkbox"] {
     padding: 1%;
     width: 45%;
 }
+
+/* BLOCK ACTIVITY STYLES */
+.reactions-activity-settings-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.reactions-activity-settings-wrapper .plugin-state-label {
+    flex-grow: 1;
+}
+
+.reactions-activity-settings-wrapper .plugin-state-label-ON {
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.reactions-activity-settings-wrapper .plugin-state-label-OFF {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+.reactions-activity-settings-wrapper .checkbox {
+    --first-color: #969696;
+    --second-color: #d0d0d0;
+
+    --width: 3rem;
+    --height: calc(var(--width) * 3 / 5);
+    --offset: .3rem;
+
+    --duration: 0.3s;
+
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
+}
+
+.reactions-activity-settings-wrapper .checkbox:hover {
+    filter: brightness(1.2);
+}
+
+.reactions-activity-settings-wrapper input {
+    position: relative;
+    display: none;
+}
+
+.reactions-activity-settings-wrapper .checkbox__div {
+    position: relative;
+
+    width: var(--width);
+    height: var(--height);
+
+    border-radius: var(--width);
+    background-color: var(--first-color);
+
+    transition: var(--duration);
+}
+
+.reactions-activity-settings-wrapper .checkbox__div::before {
+    content: "";
+    position: absolute;
+
+    top: var(--offset);
+    left: var(--offset);
+
+    width: calc(var(--height) - 2 * var(--offset));
+    height: calc(var(--height) - 2 * var(--offset));
+
+    border-radius: 50%;
+
+    background-color: var(--second-color);
+    transition: var(--duration);
+}
+
+.reactions-activity-settings-wrapper input:checked + .checkbox__div::before{
+    left: calc(var(--width) - var(--height) + var(--offset));
+}
+
+
+/* BLOCK STYLES */
+.settings-header {
+    text-align: center;
+}
+
+.reactions-settings {
+    border-top: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+
+    padding: 0.5rem 0;
+}
+
+/* BLOCK COURSE STYLES */
+.reactions-course-settings-wrapper {
+    --first-color: #f3f3f3;
+    --second-color: #b0b0b0;
+    --green: #e4ffc9;
+    --red: #ffc2c2;
+    --size: 2.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    margin-bottom: 1rem;
+}
+
+.reactions-course-settings-wrapper > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reactions-course-settings-wrapper .plugin-btn-label {
+    font-weight: bold;
+}
+
+.reactions-course-settings-wrapper button {
+    position: relative;
+
+    width: var(--size);
+    height: var(--size);
+
+    border: 0 solid transparent;
+    padding: 0;
+    border-radius: 50%;
+
+    background-color: var(--first-color);
+    box-shadow: inset 0 0 2px 0 var(--second-color);
+
+    transition: background-color 0.3s ease;
+}
+
+.reactions-course-settings-wrapper button:active {
+    border: 2px solid transparent;
+}
+
+.reactions-course-settings-wrapper .btn-on:hover {
+    background-color: var(--green);
+}
+
+.reactions-course-settings-wrapper .btn-off:hover {
+    background-color: var(--red);
+}
+
+.reactions-course-settings-wrapper button:focus {
+    outline: none;
+}
+
+.reactions-course-settings-wrapper button::before,
+.reactions-course-settings-wrapper button::after {
+    position: absolute;
+    left: calc((var(--size) - var(--size) * 0.7) / 2);
+    top: calc((var(--size) - var(--size) * 0.1) / 2);
+
+    content: "";
+
+    width: calc(var(--size) * 0.7);
+    height: calc(var(--size) * 0.1);
+
+    background-color: var(--second-color);
+}
+
+.reactions-course-settings-wrapper .btn-on::before {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+
+    width: calc(var(--size) * 0.6);
+    transform: translateX(calc(var(--size) * 0.18)) translateY(calc(var(--size) * 0.05)) rotate(-60deg);
+}
+
+.reactions-course-settings-wrapper .btn-on::after {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+
+    width: calc(var(--size) * 0.4);
+    transform: translateX(calc(var(--size) * 0.02)) translateY(calc(var(--size) * 0.20)) rotate(30deg);
+}
+
+.reactions-course-settings-wrapper .btn-off::before {
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+.reactions-course-settings-wrapper .btn-off::after {
+    border-radius: 50%;
+    transform: rotate(-45deg);
+}
+
+
