@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/reaction/db" VERSION="20201004" COMMENT="XMLDB file for Moodle blocks/reaction"
+<XMLDB PATH="blocks/reaction/db" VERSION="20201014" COMMENT="XMLDB file for Moodle blocks/reaction"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -14,6 +14,16 @@
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         <KEY NAME="unique_fields" TYPE="unique" FIELDS="userid, moduleid"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="reactions_settings" COMMENT="Show settings of reaction displaying for different modules">
+      <FIELDS>
+        <FIELD NAME="moduleid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Module id"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Module course id"/>
+        <FIELD NAME="visible" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="0 - don't show likes on module id 1 - show likes on module id"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="moduleid"/>
       </KEYS>
     </TABLE>
   </TABLES>
