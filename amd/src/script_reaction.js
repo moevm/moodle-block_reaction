@@ -1,4 +1,4 @@
-define('block_reaction/script_reaction', ['jquery', 'core/ajax'], function($, ajax) {
+define(['jquery', 'core/ajax'], function($, ajax) {
     return {
         init: function(env) {
             console.log(env)
@@ -61,3 +61,4 @@ define('block_reaction/script_reaction', ['jquery', 'core/ajax'], function($, aj
         }
     }
 });
+
