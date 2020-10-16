@@ -107,12 +107,13 @@ class block_reaction extends block_base {
             $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
             if ($moduleSettings) {
                 if ($this->page->user_is_editing()) {
-                    $this->content->text .= 'Visible: ' . $moduleSettings->visible . '<br>';
+//                     $this->content->text .= 'Visible: ' . $moduleSettings->visible . '<br>';
                 }
             } else {
                 $moduleSettings = new stdClass();
                 $moduleSettings->moduleid = $this->page->cm->id;
                 $moduleSettings->courseid = $COURSE->id;
+                $moduleSettings->visible = 1;
                 $DB->insert_record("reactions_settings", $moduleSettings);
             }
         
