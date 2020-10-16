@@ -50,9 +50,9 @@ $functions = array(
                 'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
         ),
-        'mse_ld_toggle_module_reaction' => array(
+        'mse_ld_toggle_module_reaction_visibility' => array(
                 'classname' => 'mse_ld_services',
-                'methodname'  => 'toggle_module_reaction',
+                'methodname'  => 'toggle_module_reaction_visibility',
                 'classpath'   => 'blocks/reaction/externallib.php',
                 'description' => 'Return all users reaction for activity.',
                 'type'        => 'write',

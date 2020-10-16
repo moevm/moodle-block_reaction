@@ -104,10 +104,10 @@ class block_reaction extends block_base {
         
         if (!is_null($this->page->cm)) {
         
-            $moduleSettings = $DB->get_record('reactions_settings', ['id' => $this->page->cm->id]);
+            $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
             if ($moduleSettings) {
                 if ($this->page->user_is_editing()) {
-                    $this->content->text .= 'Visible: ' . $moduleSettings->visibility . '<br>';
+                    $this->content->text .= 'Visible: ' . $moduleSettings->visible . '<br>';
                 }
             } else {
                 $moduleSettings = new stdClass();
@@ -116,7 +116,9 @@ class block_reaction extends block_base {
                 $DB->insert_record("reactions_settings", $moduleSettings);
             }
         
-            $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
+            if ($moduleSettings->visible) {
+                $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
+            }
         }
 
         $this->page->requires->css('/blocks/reaction/style.css');

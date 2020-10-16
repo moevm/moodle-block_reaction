@@ -120,11 +120,11 @@ class mse_ld_services extends external_api {
     public static function toggle_module_reaction_visibility($moduleid) {
         
         global $DB;
-        $moduleSettings = $DB->get_record('reactions_settings', ['id' => $moduleid]);
+        $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
         
         if ($moduleSettings) {
-            $visibility = ($moduleSettings->visibility + 1) % 2;
-            $DB->set_field('reactions_settings', 'visibility', $visibility, ['id' => $moduleid]);
+            $visible = ($moduleSettings->visible + 1) % 2;
+            $DB->set_field('reactions_settings', 'visible', $visible, ['moduleid' => $moduleid]);
             return true;
         }
         return false;
@@ -145,7 +145,7 @@ class mse_ld_services extends external_api {
         
         global $DB;
         
-        $DB->set_field('reactions_settings', 'visibility', 0, ['courseid' => $courseid]);
+        $DB->set_field('reactions_settings', 'visible', 0, ['courseid' => $courseid]);
         return true;
         
     }
