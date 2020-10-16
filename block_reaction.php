@@ -49,9 +49,46 @@ class block_reaction extends block_base {
     
         $this->content = new stdClass;
         if ($this->page->user_is_editing()) {
-            $this->content->text .= 'User: ' . $USER->id . '<br>';
-            $this->content->text .= 'Course: ' . $COURSE->id . '<br>';
-            $this->content->text .= 'Module: ' . $this->page->cm->id . '<br>';
+
+            if (is_null($this->page->cm)) {
+
+                $this->content->text .=
+                    html_writer::div("Plugin switcher for all activities", "settings-header")
+                    . html_writer::start_tag("div", array("class" => "reactions-course-settings-wrapper reactions-settings"))
+                        
+                        . html_writer::start_tag("div", array("class" => "all-on-btn-wrapper"))
+                            . html_writer::span("All on", "plugin-btn-label")
+                            . html_writer::tag("button", "", array("class" => "btn-on", "type" => "button"))
+                        . html_writer::end_tag("div")
+
+                        . html_writer::start_tag("div", array("class" => "all-off-btn-wrapper"))
+                            . html_writer::span("All off", "plugin-btn-label")
+                            . html_writer::tag("button", "", array("class" => "btn-off", "type" => "button"))
+                        . html_writer::end_tag("div")
+
+                    . html_writer::end_tag("div");
+
+            } else {
+
+                // settings for activity
+                $this->content->text .=
+                    html_writer::div("Plugin switcher", "settings-header")
+                    . html_writer::start_tag("div", array("class" => "reactions-activity-settings-wrapper reactions-settings"))
+                        . html_writer::span("ON", "plugin-state-label plugin-state-label-ON")
+
+                        . html_writer::start_tag("label", array("class" => "checkbox"))
+                            . html_writer::checkbox("plugin-state", "")
+                            . html_writer::div("", "checkbox__div")
+                        . html_writer::end_tag("label")
+
+                        . html_writer::span("OFF", "plugin-state-label plugin-state-label-OFF")
+                    . html_writer::end_tag("div");
+            }
+
+            /* Debug parameters */
+//            $this->content->text .= 'User: ' . $USER->id . '<br>';
+//            $this->content->text .= 'Course: ' . $COURSE->id . '<br>';
+//            $this->content->text .= 'Module: ' . $this->page->cm->id . '<br>';
         }
 
         $user_reaction = mse_ld_services::get_reaction($this->page->cm->id);
@@ -80,9 +117,10 @@ class block_reaction extends block_base {
             }
         
             $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
-            $this->page->requires->css('/blocks/reaction/style.css');
-            $this->page->requires->js('/blocks/reaction/script.js');
         }
+
+        $this->page->requires->css('/blocks/reaction/style.css');
+        $this->page->requires->js('/blocks/reaction/script.js');
     
         return $this->content;
     }
