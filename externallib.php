@@ -86,7 +86,7 @@ class mse_ld_services extends external_api {
     
     public static function get_total_reaction_parameters() {
         return new external_function_parameters(
-                array('moduleid' => new external_value(PARAM_INT, 'Сourse id to which section will be added.'))
+                array('moduleid' => new external_value(PARAM_INT, 'Module id which reaction will be returned'))
         );
     }
 
@@ -110,4 +110,48 @@ class mse_ld_services extends external_api {
             )
         );
     }
+    
+    public static function toggle_module_reaction_visibility_parameters() {
+        return new external_function_parameters(
+                array('moduleid' => new external_value(PARAM_INT, 'Module id to disable reactions'))
+        );
+    }
+    
+    public static function toggle_module_reaction_visibility($moduleid) {
+        
+        global $DB;
+        $moduleSettings = $DB->get_record('reactions_settings', ['id' => $moduleid]);
+        
+        if ($moduleSettings) {
+            $visibility = ($moduleSettings->visibility + 1) % 2;
+            $DB->set_field('reactions_settings', 'visibility', $visibility, ['id' => $moduleid]);
+            return true;
+        }
+        return false;
+        
+    }
+    
+    public static function toggle_module_reaction_visibility_returns() {
+        return  new external_value(PARAM_BOOL, 'true if succesfull');
+    }
+    
+    public static function disable_course_modules_reactions_parameters() {
+        return new external_function_parameters(
+                array('courseid' => new external_value(PARAM_INT, 'Course id to disable reactions'))
+        );
+    }
+    
+    public static function disable_course_modules_reactions($courseid) {
+        
+        global $DB;
+        
+        $DB->set_field('reactions_settings', 'visibility', 0, ['courseid' => $courseid]);
+        return true;
+        
+    }
+    
+    public static function disable_course_modules_reactions_returns() {
+        return  new external_value(PARAM_BOOL, 'true if succesfull');
+    }
+    
 }

@@ -66,6 +66,19 @@ class block_reaction extends block_base {
         $paramsamd = array($envconf);
         
         if (!is_null($this->page->cm)) {
+        
+            $moduleSettings = $DB->get_record('reactions_settings', ['id' => $this->page->cm->id]);
+            if ($moduleSettings) {
+                if ($this->page->user_is_editing()) {
+                    $this->content->text .= 'Visible: ' . $moduleSettings->visibility . '<br>';
+                }
+            } else {
+                $moduleSettings = new stdClass();
+                $moduleSettings->moduleid = $this->page->cm->id;
+                $moduleSettings->courseid = $COURSE->id;
+                $DB->insert_record("reactions_settings", $moduleSettings);
+            }
+        
             $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
             $this->page->requires->css('/blocks/reaction/style.css');
             $this->page->requires->js('/blocks/reaction/script.js');

@@ -49,5 +49,23 @@ $functions = array(
                 'type'        => 'write',
                 'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        ),
+        'mse_ld_toggle_module_reaction' => array(
+                'classname' => 'mse_ld_services',
+                'methodname'  => 'toggle_module_reaction',
+                'classpath'   => 'blocks/reaction/externallib.php',
+                'description' => 'Return all users reaction for activity.',
+                'type'        => 'write',
+                'ajax'        => 'true',
+                'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        ),
+        'mse_ld_disable_course_modules_reactions' => array(
+                'classname' => 'mse_ld_services',
+                'methodname'  => 'disable_course_modules_reactions',
+                'classpath'   => 'blocks/reaction/externallib.php',
+                'description' => 'Return all users reaction for activity.',
+                'type'        => 'write',
+                'ajax'        => 'true',
+                'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
         )
 );
