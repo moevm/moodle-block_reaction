@@ -127,13 +127,15 @@ input[type="checkbox"] {
 }
 
 .bar {
+    /* red */
     background-color: rgba(205, 92, 92, 1);
 }
 
 .bar-likes {
+    /* green */
     background: rgba(144, 238, 144, 1);
     /*bar height*/
-    padding: 1%;
+    padding: 1% 0;
     width: 45%;
 }
 
