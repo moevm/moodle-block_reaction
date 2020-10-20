@@ -30,7 +30,7 @@ class mse_ld_services extends external_api {
                 array(
                 'moduleid' => new external_value(PARAM_INT, 'Id of module to add reaction'),
                 'reaction' => new external_value(PARAM_INT, 'reaction. 0 - dislike, 1 - like, 2 - undefined')
-                ),
+                )
         );
     }
 
