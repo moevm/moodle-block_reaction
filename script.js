@@ -98,3 +98,18 @@ function changeDislikes(delta) {
     label.innerHTML = newValue;
 }
 
+function switcher(id) {
+    require(['core/ajax'], (ajax) => {
+        ajax.call([{
+            methodname: "mse_ld_toggle_module_reaction_visibility",
+            args: {
+                moduleid: id
+            }
+        }])[0]
+            .done(() => {console.log("Switched: ", id)})
+            .fail(() => {
+                document.getElementsByName("plugin-state")[0].checked = !document.getElementsByName("plugin-state")[0].checked;
+            })
+    })    
+}
+

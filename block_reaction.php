@@ -48,6 +48,21 @@ class block_reaction extends block_base {
         }
     
         $this->content = new stdClass;
+
+        /* get data from DB */
+        $moduleSettings;
+        if (!is_null($this->page->cm)) {
+            $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
+            if (!$moduleSettings) {
+                $moduleSettings = new stdClass();
+                $moduleSettings->moduleid = $this->page->cm->id;
+                $moduleSettings->courseid = $COURSE->id;
+                $moduleSettings->visible = 1;
+                $DB->insert_record("reactions_settings", $moduleSettings);
+            }
+        }
+
+        /* build block */
         if ($this->page->user_is_editing()) {
 
             if (is_null($this->page->cm)) {
@@ -77,12 +92,12 @@ class block_reaction extends block_base {
                         . html_writer::span("ON", "plugin-state-label plugin-state-label-ON")
 
                         . html_writer::start_tag("label", array("class" => "checkbox"))
-                            . html_writer::checkbox("plugin-state", "")
+                            . html_writer::checkbox("plugin-state", "", ($moduleSettings->visible === 1) ? false : true, "", array("onclick" => "switcher('" . $this->page->cm->id . "')"))
                             . html_writer::div("", "checkbox__div")
                         . html_writer::end_tag("label")
 
                         . html_writer::span("OFF", "plugin-state-label plugin-state-label-OFF")
-                    . html_writer::end_tag("div");
+                    . html_writer::end_tag("div");               
             }
 
             /* Debug parameters */
@@ -101,22 +116,8 @@ class block_reaction extends block_base {
                 );
 
         $paramsamd = array($envconf);
-        
-        if (!is_null($this->page->cm)) {
-        
-            $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
-            if ($moduleSettings) {
-                if ($this->page->user_is_editing()) {
-//                     $this->content->text .= 'Visible: ' . $moduleSettings->visible . '<br>';
-                }
-            } else {
-                $moduleSettings = new stdClass();
-                $moduleSettings->moduleid = $this->page->cm->id;
-                $moduleSettings->courseid = $COURSE->id;
-                $moduleSettings->visible = 1;
-                $DB->insert_record("reactions_settings", $moduleSettings);
-            }
-        
+
+        if(!is_null($this->page->cm)) {
             if ($moduleSettings->visible) {
                 $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
             }
