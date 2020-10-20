@@ -11,25 +11,52 @@ define(['jquery', 'core/ajax'], function($, ajax) {
             /* Wait that the DOM is fully loaded */
             $(() => {
                 /*get values likes and dislikes count */
-                let likesCount = "0";
-                let dislikesCount = "1";
+                let likesCount = env.total_reaction.likes;
+                let dislikesCount = env.total_reaction.dislikes;
 
                 /* build plugin interface */
                 let wrapper = $('<div class="plugin-wrapper">');
                 let ui = $('<div class="likes-dislikes-plugin-ui">');
 
-                let like = $('<input type="checkbox" id="like" onclick="likeClicked()">');
-                let likeLabel = $('<label for="like">');
+                let like = $(`<input type="checkbox" id="like">`).click(() => {likeClicked(ajax, env.mod_id)});
+                let likeLabel = $('<label for="like" id="like-label">');
                 likeLabel.text(likesCount);
 
                 let barWrapper = $('<div class="bar-wrapper">');
                 let bar = $('<span class="bar">');
-                let barLikes = $('<span class="bar-likes">');
+                let barLikes = $('<span class="bar-likes" id="bar-likes">');
 
-                let dislike = $('<input type="checkbox" id="dislike" onclick="dislikeClicked()">');
-                let dislikeLabel = $('<label for="dislike">');
+                let dislike = $(`<input type="checkbox" id="dislike">`).click(() => {dislikeClicked(ajax, env.mod_id)});
+                let dislikeLabel = $('<label for="dislike" id="dislike-label">');
                 dislikeLabel.text(dislikesCount);
 
+                /* find and set ratio */
+                const ratio = likesCount / (likesCount + dislikesCount) * 100;
+                if(isNaN(ratio)){
+                    barLikes.css({
+                        "width": "100%",
+                        "background-color": "#D1D1D1"
+                    });
+                } else {
+                    barLikes.css("width", `${ratio}%`);
+                }
+
+                console.log(ratio);
+
+                /* check button being pressed */
+                switch (env.user_reaction) {
+                    case "0":
+                        dislike.prop("checked", true);
+                        break;
+
+                    case "1":
+                        like.prop("checked", true);
+                        break;
+
+                    default: break;
+                }
+
+                /* embed plugin */
                 wrapper.append(ui);
                 ui.append(like);
                 ui.append(likeLabel);
@@ -42,21 +69,6 @@ define(['jquery', 'core/ajax'], function($, ajax) {
                 ui.append(dislikeLabel);
 
                 $('div[role="main"]').append(wrapper);
-                
-                urPromise = ajax.call([{
-                    methodname: 'mse_ld_get_reaction',
-                    args: {
-                        moduleid: env.mod_id
-                    }
-                }])
-                $.when(urPromise[0]).done((answ) => console.log('User reaction: ', answ))
-                trPromise = ajax.call([{
-                    methodname: 'mse_ld_get_total_reaction',
-                    args: {
-                        moduleid: env.mod_id
-                    }
-                }])
-                $.when(trPromise[0]).done((answ) => console.log('Total reaction: ', answ))
             });
         }
     }
