@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/blocks/reaction/lib.php');
 require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
 
 /**
@@ -40,6 +41,14 @@ class block_reaction extends block_base {
 
     }
     
+    public function instance_create() {
+        global $COURSE, $DB;
+        
+        if(!is_null($this->page->cm)) {
+            init_module_block_settings($COURSE->id, $this->page->cm->id);
+        }
+    }
+    
     public function get_content() {
         global $USER, $COURSE, $DB;
     
@@ -48,19 +57,6 @@ class block_reaction extends block_base {
         }
     
         $this->content = new stdClass;
-
-        /* get data from DB */
-        $moduleSettings;
-        if (!is_null($this->page->cm)) {
-            $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
-            if (!$moduleSettings) {
-                $moduleSettings = new stdClass();
-                $moduleSettings->moduleid = $this->page->cm->id;
-                $moduleSettings->courseid = $COURSE->id;
-                $moduleSettings->visible = 1;
-                $DB->insert_record("reactions_settings", $moduleSettings);
-            }
-        }
 
         /* build block */
         if ($this->page->user_is_editing()) {
@@ -84,6 +80,8 @@ class block_reaction extends block_base {
                     . html_writer::end_tag("div");
 
             } else {
+            
+                $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
 
                 // settings for activity
                 $this->content->text .=
@@ -106,19 +104,18 @@ class block_reaction extends block_base {
 //            $this->content->text .= 'Module: ' . $this->page->cm->id . '<br>';
         }
 
-        $user_reaction = mse_ld_services::get_reaction($this->page->cm->id);
-        $total_reaction = mse_ld_services::get_total_reaction($this->page->cm->id);
-        
-        $envconf = array(
-                    'mod_id' => $this->page->cm->id,
-                    'user_reaction' => $user_reaction,
-                    'total_reaction' => $total_reaction
-                );
-
-        $paramsamd = array($envconf);
-
         if(!is_null($this->page->cm)) {
             if ($moduleSettings->visible) {
+                $user_reaction = mse_ld_services::get_reaction($this->page->cm->id);
+                $total_reaction = mse_ld_services::get_total_reaction($this->page->cm->id);
+        
+                $envconf = array(
+                            'mod_id' => $this->page->cm->id,
+                            'user_reaction' => $user_reaction,
+                            'total_reaction' => $total_reaction
+                        );
+
+                $paramsamd = array($envconf);
                 $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
             }
         }
