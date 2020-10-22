@@ -135,22 +135,25 @@ class mse_ld_services extends external_api {
         return  new external_value(PARAM_BOOL, 'true if succesfull');
     }
     
-    public static function disable_course_modules_reactions_parameters() {
+    public static function set_course_modules_reactions_visible_parameters() {
         return new external_function_parameters(
-                array('courseid' => new external_value(PARAM_INT, 'Course id to disable reactions'))
+                array(
+                'courseid' => new external_value(PARAM_INT, 'Course id to disable reactions'),
+                'visible' => new external_value(PARAM_INT, 'Module visibility, 0 - false, 1 - true')
+                )
         );
     }
     
-    public static function disable_course_modules_reactions($courseid) {
+    public static function set_course_modules_reactions_visible($courseid, $visible) {
         
         global $DB;
         
-        $DB->set_field('reactions_settings', 'visible', 0, ['courseid' => $courseid]);
+        $DB->set_field('reactions_settings', 'visible', $visible, ['courseid' => $courseid]);
         return true;
         
     }
     
-    public static function disable_course_modules_reactions_returns() {
+    public static function set_course_modules_reactions_visible_returns() {
         return  new external_value(PARAM_BOOL, 'true if succesfull');
     }
     
