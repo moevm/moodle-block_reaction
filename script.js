@@ -113,3 +113,77 @@ function switcher(id) {
     })    
 }
 
+function allTurnOn(courseId) {
+    let wrapper = document.querySelector(".reactions-course-settings-wrapper").parentNode
+    let div_msg = document.querySelector(".course-settings-message")
+
+    if(!div_msg){
+        div_msg = document.createElement("div");
+        div_msg.classList.add("course-settings-message");
+        wrapper.appendChild(div_msg);
+    }
+
+    console.log(courseId);
+    
+    require(['core/ajax'], (ajax) => {
+        ajax.call([{
+            methodname: "mse_ld_set_course_modules_reactions_visible",
+            args: {
+                courseid: courseId,
+                visible: 1
+            }
+        }])[0]
+            .done(() => {
+                div_msg.innerHTML = "Plugin enabled in all modules"
+            })
+            .fail((err) => {
+                div_msg.innerHTML = "Error. Please, try again"
+                console.log(err)
+            })
+            .always(() => {
+                this.timer = setTimeout(() => {
+                    div_msg.remove();
+                }, 2000)
+            })
+    })
+}
+
+function allTurnOff(courseId) {
+    let wrapper = document.querySelector(".reactions-course-settings-wrapper").parentNode;
+    let div_msg = document.querySelector(".course-settings-message")
+
+    if(!div_msg){
+        div_msg = document.createElement("div");
+        div_msg.classList.add("course-settings-message");
+        wrapper.appendChild(div_msg);
+    }
+
+    console.log(courseId);
+    
+    require(['core/ajax'], (ajax) => {
+        ajax.call([{
+            methodname: "mse_ld_set_course_modules_reactions_visible",
+            args: {
+                courseid: courseId,
+                visible: 0
+            }
+        }])[0]
+            .done(() => {
+                div_msg.innerHTML = "Plugin disabled in all modules"
+            })
+            .fail((err) => {
+                div_msg.innerHTML = "Error. Please, try again"
+                console.log(err)
+            })
+            .always(() => {
+                this.timer = setTimeout(() => {
+                    div_msg.remove();
+                }, 2000)
+            })
+    })
+}
+
+
+
+
+

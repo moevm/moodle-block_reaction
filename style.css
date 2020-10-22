@@ -327,4 +327,9 @@ input[type="checkbox"] {
     transform: rotate(-45deg);
 }
 
+.course-settings-message {
+    font-family: sans-serif;
+    text-align: center;
+}
+
 
