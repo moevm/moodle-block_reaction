@@ -69,12 +69,12 @@ class block_reaction extends block_base {
                         
                         . html_writer::start_tag("div", array("class" => "all-on-btn-wrapper"))
                             . html_writer::span("All on", "plugin-btn-label")
-                            . html_writer::tag("button", "", array("class" => "btn-on", "type" => "button"))
+                            . html_writer::tag("button", "", array("class" => "btn-on", "type" => "button", "onclick" => "allTurnOn('" . $COURSE->id . "')"))
                         . html_writer::end_tag("div")
 
                         . html_writer::start_tag("div", array("class" => "all-off-btn-wrapper"))
                             . html_writer::span("All off", "plugin-btn-label")
-                            . html_writer::tag("button", "", array("class" => "btn-off", "type" => "button"))
+                            . html_writer::tag("button", "", array("class" => "btn-off", "type" => "button", "onclick" => "allTurnOff('" . $COURSE->id . "')"))
                         . html_writer::end_tag("div")
 
                     . html_writer::end_tag("div");
@@ -90,7 +90,7 @@ class block_reaction extends block_base {
                         . html_writer::span("ON", "plugin-state-label plugin-state-label-ON")
 
                         . html_writer::start_tag("label", array("class" => "checkbox"))
-                            . html_writer::checkbox("plugin-state", "", ($moduleSettings->visible === 1) ? false : true, "", array("onclick" => "switcher('" . $this->page->cm->id . "')"))
+                            . html_writer::checkbox("plugin-state", "", ($moduleSettings->visible == 1) ? false : true, "", array("onclick" => "switcher('" . $this->page->cm->id . "')"))
                             . html_writer::div("", "checkbox__div")
                         . html_writer::end_tag("label")
 
