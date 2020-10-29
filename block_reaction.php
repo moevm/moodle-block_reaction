@@ -105,6 +105,7 @@ class block_reaction extends block_base {
         }
 
         if(!is_null($this->page->cm)) {
+            $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $this->page->cm->id]);
             if ($moduleSettings->visible) {
                 $user_reaction = mse_ld_services::get_reaction($this->page->cm->id);
                 $total_reaction = mse_ld_services::get_total_reaction($this->page->cm->id);
