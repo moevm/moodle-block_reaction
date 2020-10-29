@@ -64,23 +64,21 @@ function reactionRequest(ajax, moduleID, reaction) {
 
 
 function recalculateRatio(){
-    if(typeof recalculateRatio.likeDOM === undefined || typeof recalculateRatio.dislikeDOM === undefined || typeof recalculateRatio.bar === undefined){
-        recalculateRatio.likeDOM = document.getElementById("like-label");
-        recalculateRatio.dislikeDOM = document.getElementById("dislike-label");
-        recalculateRatio.bar = document.getElementById("bar-likes");
-    }
+    likeDOM = document.getElementById("like-label");
+    dislikeDOM = document.getElementById("dislike-label");
+    bar = document.getElementById("bar-likes");
 
-    const likes = parseInt(recalculateRatio.likeDOM.innerText || recalculateRatio.likeDOM.textContent);
-    const dislikes = parseInt(recalculateRatio.dislikeDOM.innerText || recalculateRatio.dislikeDOM.textContent);
+    const likes = parseInt(likeDOM.innerText || likeDOM.textContent);
+    const dislikes = parseInt(dislikeDOM.innerText || dislikeDOM.textContent);
 
     const ratio = likes / (likes + dislikes) * 100;
 
     if(isNaN(ratio)){
-        recalculateRatio.bar.style.width = `100%`;
-        recalculateRatio.bar.style.background = "#D1D1D1";
+        bar.style.width = `100%`;
+        bar.style.background = "#D1D1D1";
     } else {
-        recalculateRatio.bar.style.width = `${ratio}%`;
-        recalculateRatio.bar.style.background = "#90EE90";
+        bar.style.width = `${ratio}%`;
+        bar.style.background = "#90EE90";
     }
 }
 
