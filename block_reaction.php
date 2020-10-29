@@ -116,9 +116,8 @@ class block_reaction extends block_base {
                         );
 
                 $paramsamd = array($envconf);
+                $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
             }
-
-            $this->page->requires->js_call_amd('block_reaction/script_reaction', 'init', $paramsamd);
         }
 
         $this->page->requires->css('/blocks/reaction/style.css');
