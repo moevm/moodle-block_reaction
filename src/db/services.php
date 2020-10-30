@@ -59,6 +59,15 @@ $functions = array(
                 'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
         ),
+        'mse_ld_get_module_reactions_visibility' => array(
+                'classname' => 'mse_ld_services',
+                'methodname'  => 'get_module_reactions_visibility',
+                'classpath'   => 'blocks/reaction/externallib.php',
+                'description' => 'Return visibility of module',
+                'type'        => 'write',
+                'ajax'        => 'true',
+                'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
+        ),
         'mse_ld_set_course_modules_reactions_visible' => array(
                 'classname' => 'mse_ld_services',
                 'methodname'  => 'set_course_modules_reactions_visible',
@@ -67,5 +76,5 @@ $functions = array(
                 'type'        => 'write',
                 'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
-        )
+        )   
 );

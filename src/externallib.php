@@ -135,6 +135,24 @@ class mse_ld_services extends external_api {
         return  new external_value(PARAM_BOOL, 'true if succesfull');
     }
     
+    public static function get_module_reactions_visibility_parameters() {
+        return new external_function_parameters(
+                array('moduleid' => new external_value(PARAM_INT, 'Get module reactions visibility'))
+        );
+    }
+    
+    public static function get_module_reactions_visibility($moduleid) {        
+        global $DB;
+        
+        $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
+
+        return $moduleSettings->visible;
+    }
+    
+    public static function get_module_reactions_visibility_returns() {
+        return  new external_value(PARAM_BOOL, 'false - invisible, true - visible');
+    }
+    
     public static function set_course_modules_reactions_visible_parameters() {
         return new external_function_parameters(
                 array(
