@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_reaction';
-$plugin->version   = 2020102101;
+$plugin->version   = 2020102901;
 $plugin->requires  = 2017051502;
 $plugin->maturity = MATURITY_STABLE;
 $plugin->release = 'v0.1';
