@@ -1,0 +1,19 @@
+{
+  "name": "mse_likes_and_dislikes_plugin_tests",
+  "version": "1.0.0",
+  "description": "test for likes and dislikes plugin",
+  "main": "test.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "test",
+    "mse_plugin"
+  ],
+  "author": "Samoilova A.",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^8.2.0",
+    "supertest": "^6.0.0"
+  }
+}
