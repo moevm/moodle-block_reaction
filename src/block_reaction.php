@@ -45,7 +45,9 @@ class block_reaction extends block_base {
         global $COURSE, $DB;
         
         if(!is_null($this->page->cm)) {
-            init_module_block_settings($COURSE->id, $this->page->cm->id);
+            if (!$DB->record_exists('reactions_settings', ['moduleid' => $this->page->cm->id])) {
+                init_module_block_settings($COURSE->id, $this->page->cm->id);
+            }
         }
     }
     
