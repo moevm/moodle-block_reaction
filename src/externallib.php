@@ -21,7 +21,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
  
- require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->libdir . '/moodlelib.php');
 
 class mse_ld_services extends external_api {
 
@@ -36,8 +37,11 @@ class mse_ld_services extends external_api {
 
     public static function set_reaction($moduleid, $reaction) {
         
-        global $USER;
-        global $DB;
+        global $DB, $USER;
+        
+        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+        $courseid = $module->course;
+        require_login($courseid, true, $module);
     
         if ($reaction < 2) {
             if ($DB->record_exists('reactions', ['userid' => $USER->id, 'moduleid' => $moduleid])) {
@@ -68,9 +72,12 @@ class mse_ld_services extends external_api {
 
     public static function get_reaction($moduleid) {
         
-        global $USER;
-        global $DB;
+        global $DB, $PAGE, $USER;
 
+        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+        $courseid = $module->course;
+        require_login($courseid, true, $module);
+        
         $reactionDatum = $DB->get_record("reactions", ['userid' => $USER->id, 'moduleid' => $moduleid]);
         
         if ($reactionDatum) {
@@ -94,6 +101,10 @@ class mse_ld_services extends external_api {
         
         global $USER;
         global $DB;
+        
+        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+        $courseid = $module->course;
+        require_login($courseid, true, $module);
 
         $reaction = new stdClass();
         $reaction->likes = $DB->count_records('reactions', ['moduleid' => $moduleid, 'reaction' => true]);
@@ -119,7 +130,16 @@ class mse_ld_services extends external_api {
     
     public static function toggle_module_reaction_visibility($moduleid) {
         
-        global $DB;
+        global $DB, $PAGE;
+        
+        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+        $courseid = $module->course;
+        require_login($courseid, true, $module);
+        
+        if (!$PAGE->user_allowed_editing()) {
+            return false;
+        }
+        
         $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
         
         if ($moduleSettings) {
@@ -144,6 +164,10 @@ class mse_ld_services extends external_api {
     public static function get_module_reactions_visibility($moduleid) {        
         global $DB;
         
+        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+        $courseid = $module->course;
+        require_login($courseid, true, $module);
+        
         $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
 
         return $moduleSettings->visible;
@@ -164,7 +188,12 @@ class mse_ld_services extends external_api {
     
     public static function set_course_modules_reactions_visible($courseid, $visible) {
         
-        global $DB;
+        global $DB, $PAGE;
+        
+        require_login($courseid);
+        if (!$PAGE->user_allowed_editing()) {
+            return false;
+        }
         
         $DB->set_field('reactions_settings', 'visible', $visible, ['courseid' => $courseid]);
         return true;
