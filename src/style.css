@@ -1,5 +1,17 @@
 /* PLUGIN STYLES */
-.plugin-wrapper {
+textarea.mse-likes-dislikes-plugin,
+input..mse-likes-dislikes-plugin {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+        -ms-appearance: none;
+         -o-appearance: none;
+            appearance: none;
+
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.plugin-wrapper.mse-likes-dislikes-plugin {
     padding: 0;
     margin-top: 20px;
 
@@ -8,7 +20,7 @@
     align-items: center;
 }
 
-.likes-dislikes-plugin-ui {
+.likes-dislikes-plugin-ui.mse-likes-dislikes-plugin {
     position: relative;
 
     width: 250px;
@@ -20,7 +32,7 @@
     align-items: center;
 }
 
-.likes-dislikes-plugin-ui label {
+.likes-dislikes-plugin-ui.mse-likes-dislikes-plugin label {
     font-family: sans-serif;
     font-weight: bold;
     font-size: 80%;
@@ -37,21 +49,21 @@
     transition: color 0.3s;
 }
 
-label[for="like"] {
+label.mse-likes-dislikes-plugin[for="like"] {
     left: 3%;
     top: 2%;
 
     justify-content: flex-end;
 }
 
-label[for="dislike"] {
+label.mse-likes-dislikes-plugin[for="dislike"] {
     right: 3%;
     bottom: 2%;
 
     justify-content: flex-start;
 }
 
-input[type="checkbox"] {
+input.mse-likes-dislikes-plugin[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
 
@@ -65,49 +77,49 @@ input[type="checkbox"] {
     border-right: 15px solid transparent;
 }
 
-#like {
+#like.mse-likes-dislikes-plugin {
     border-bottom: 15px solid rgba(191, 191, 191, 0.75);
     transition: border-bottom-color 0.3s;
 }
 
-#like:hover {
+#like.mse-likes-dislikes-plugin:hover {
     border-bottom-color: rgba(144, 238, 144, 0.75);
 }
 
-#like:hover + label {
+#like.mse-likes-dislikes-plugin:hover + label {
     color: rgba(144, 238, 144, 0.75);
 }
 
-#like:checked {
+#like.mse-likes-dislikes-plugin:checked {
     border-bottom-color: rgba(144, 238, 144, 1);
 }
 
-#like:checked + label{
+#like.mse-likes-dislikes-plugin:checked + label{
     color: rgba(144, 238, 144, 1);
 }
 
-#dislike {
+#dislike.mse-likes-dislikes-plugin {
     border-top: 15px solid rgba(191, 191, 191, 0.75);
     transition: border-top-color 0.5s;
 }
 
-#dislike:hover {
+#dislike.mse-likes-dislikes-plugin:hover {
     border-top-color: rgba(205, 92, 92, 0.75);
 }
 
-#dislike:hover + label {
+#dislike.mse-likes-dislikes-plugin:hover + label {
     color: rgba(205, 92, 92, 0.75);;
 }
 
-#dislike:checked {
+#dislike.mse-likes-dislikes-plugin:checked {
     border-top-color: rgba(205, 92, 92, 1);;
 }
 
-#dislike:checked + label{
+#dislike.mse-likes-dislikes-plugin:checked + label{
     color: rgba(205, 92, 92, 1);
 }
 
-.bar-wrapper {
+.bar-wrapper.mse-likes-dislikes-plugin {
     border-radius: 20px;
     overflow: hidden;
 
@@ -118,20 +130,20 @@ input[type="checkbox"] {
     transition: width 0.3s;
 }
 
-.likes-dislikes-plugin-ui:hover>.bar-wrapper {
+.likes-dislikes-plugin-ui.mse-likes-dislikes-plugin:hover>.bar-wrapper.mse-likes-dislikes-plugin {
     width: 80%;
 }
 
-.bar-wrapper span {
+.bar-wrapper.mse-likes-dislikes-plugin span {
     display: block;
 }
 
-.bar {
+.bar.mse-likes-dislikes-plugin {
     /* red */
     background-color: rgba(205, 92, 92, 1);
 }
 
-.bar-likes {
+.bar-likes.mse-likes-dislikes-plugin {
     /* green */
     background: rgba(144, 238, 144, 1);
     /*bar height*/
@@ -183,6 +195,8 @@ input[type="checkbox"] {
 .reactions-activity-settings-wrapper input {
     position: relative;
     display: none;
+
+    outline: none !important;
 }
 
 .reactions-activity-settings-wrapper .checkbox__div {
@@ -264,6 +278,7 @@ input[type="checkbox"] {
     border: 0 solid transparent;
     padding: 0;
     border-radius: 50%;
+    outline: none !important;
 
     background-color: var(--first-color);
     box-shadow: inset 0 0 2px 0 var(--second-color);
