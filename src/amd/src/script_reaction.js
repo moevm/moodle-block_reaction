@@ -15,19 +15,19 @@ define(['jquery', 'core/ajax'], function($, ajax) {
                 let dislikesCount = env.total_reaction.dislikes;
 
                 /* build plugin interface */
-                let wrapper = $('<div class="plugin-wrapper">');
-                let ui = $('<div class="likes-dislikes-plugin-ui">');
+                let wrapper = $('<div class="mse-likes-dislikes-plugin plugin-wrapper">');
+                let ui = $('<div class="mse-likes-dislikes-plugin likes-dislikes-plugin-ui">');
 
-                let like = $(`<input type="checkbox" id="like">`).click(() => {likeClicked(ajax, env.mod_id)});
-                let likeLabel = $('<label for="like" id="like-label">');
+                let like = $(`<input type="checkbox" class="mse-likes-dislikes-plugin" id="like">`).click(() => {likeClicked(ajax, env.mod_id)});
+                let likeLabel = $('<label for="like" class="mse-likes-dislikes-plugin" id="like-label">');
                 likeLabel.text(likesCount);
 
-                let barWrapper = $('<div class="bar-wrapper">');
-                let bar = $('<span class="bar">');
-                let barLikes = $('<span class="bar-likes" id="bar-likes">');
+                let barWrapper = $('<div class="mse-likes-dislikes-plugin bar-wrapper">');
+                let bar = $('<span class="mse-likes-dislikes-plugin bar">');
+                let barLikes = $('<span class="mse-likes-dislikes-plugin bar-likes" id="bar-likes">');
 
-                let dislike = $(`<input type="checkbox" id="dislike">`).click(() => {dislikeClicked(ajax, env.mod_id)});
-                let dislikeLabel = $('<label for="dislike" id="dislike-label">');
+                let dislike = $(`<input type="checkbox" class="mse-likes-dislikes-plugin" id="dislike">`).click(() => {dislikeClicked(ajax, env.mod_id)});
+                let dislikeLabel = $('<label for="dislike" class="mse-likes-dislikes-plugin" id="dislike-label">');
                 dislikeLabel.text(dislikesCount);
 
                 /* find and set ratio */
