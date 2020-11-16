@@ -66,16 +66,23 @@ class block_reaction extends block_base {
             if (is_null($this->page->cm)) {
 
                 $this->content->text .=
-                    html_writer::div("Plugin switcher for all activities", "settings-header")
-                    . html_writer::start_tag("div", array("class" => "reactions-course-settings-wrapper reactions-settings"))
+                    html_writer::div(get_string('plugin_switcher_course', 'block_reaction'), "settings-header")
+                    . html_writer::start_tag("div",
+                        array(
+                            "class" => "reactions-course-settings-wrapper reactions-settings",
+                            "data-success-on" => get_string('success_on', 'block_reaction'),
+                            "data-success-off" => get_string('success_off', 'block_reaction'),
+                            "data-error" => get_string('error', 'block_reaction')
+                        )
+                    )
                         
                         . html_writer::start_tag("div", array("class" => "all-on-btn-wrapper"))
-                            . html_writer::span("All on", "plugin-btn-label")
+                            . html_writer::span(get_string('all_on', 'block_reaction'), "plugin-btn-label")
                             . html_writer::tag("button", "", array("class" => "btn-on", "type" => "button", "onclick" => "allTurnOn('" . $COURSE->id . "')"))
                         . html_writer::end_tag("div")
 
                         . html_writer::start_tag("div", array("class" => "all-off-btn-wrapper"))
-                            . html_writer::span("All off", "plugin-btn-label")
+                            . html_writer::span(get_string('all_off', 'block_reaction'), "plugin-btn-label")
                             . html_writer::tag("button", "", array("class" => "btn-off", "type" => "button", "onclick" => "allTurnOff('" . $COURSE->id . "')"))
                         . html_writer::end_tag("div")
 
@@ -87,16 +94,16 @@ class block_reaction extends block_base {
 
                 // settings for activity
                 $this->content->text .=
-                    html_writer::div("Plugin switcher", "settings-header")
+                    html_writer::div(get_string("plugin_switcher_module", 'block_reaction'), "settings-header")
                     . html_writer::start_tag("div", array("class" => "reactions-activity-settings-wrapper reactions-settings"))
-                        . html_writer::span("ON", "plugin-state-label plugin-state-label-ON")
+                        . html_writer::span(get_string('on', 'block_reaction'), "plugin-state-label plugin-state-label-ON")
 
                         . html_writer::start_tag("label", array("class" => "checkbox"))
                             . html_writer::checkbox("plugin-state", "", ($moduleSettings->visible == 1) ? false : true, "", array("onclick" => "switcher('" . $this->page->cm->id . "')"))
                             . html_writer::div("", "checkbox__div")
                         . html_writer::end_tag("label")
 
-                        . html_writer::span("OFF", "plugin-state-label plugin-state-label-OFF")
+                        . html_writer::span(get_string('off', 'block_reaction'), "plugin-state-label plugin-state-label-OFF")
                     . html_writer::end_tag("div");               
             }
 

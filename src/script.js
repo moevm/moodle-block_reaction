@@ -112,7 +112,8 @@ function switcher(id) {
 }
 
 function allTurnOn(courseId) {
-    let wrapper = document.querySelector(".reactions-course-settings-wrapper").parentNode
+    let settings_wrapper = document.querySelector(".reactions-course-settings-wrapper")
+    let wrapper = settings_wrapper.parentNode
     let div_msg = document.querySelector(".course-settings-message")
 
     if(!div_msg){
@@ -132,10 +133,10 @@ function allTurnOn(courseId) {
             }
         }])[0]
             .done(() => {
-                div_msg.innerHTML = "Plugin enabled in all modules"
+                div_msg.innerHTML = settings_wrapper.dataset.successOn
             })
             .fail((err) => {
-                div_msg.innerHTML = "Error. Please, try again"
+                div_msg.innerHTML = settings_wrapper.dataset.error
                 console.log(err)
             })
             .always(() => {
@@ -147,7 +148,8 @@ function allTurnOn(courseId) {
 }
 
 function allTurnOff(courseId) {
-    let wrapper = document.querySelector(".reactions-course-settings-wrapper").parentNode;
+    let settings_wrapper = document.querySelector(".reactions-course-settings-wrapper")
+    let wrapper = settings_wrapper.parentNode
     let div_msg = document.querySelector(".course-settings-message")
 
     if(!div_msg){
@@ -167,10 +169,10 @@ function allTurnOff(courseId) {
             }
         }])[0]
             .done(() => {
-                div_msg.innerHTML = "Plugin disabled in all modules"
+                div_msg.innerHTML = settings_wrapper.dataset.successOff
             })
             .fail((err) => {
-                div_msg.innerHTML = "Error. Please, try again"
+                div_msg.innerHTML = settings_wrapper.dataset.error
                 console.log(err)
             })
             .always(() => {
