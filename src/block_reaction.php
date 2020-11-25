@@ -65,6 +65,12 @@ class block_reaction extends block_base {
 
             if (is_null($this->page->cm)) {
 
+                $parameters = [
+                    "courseid" => $COURSE->id
+                ];
+
+                $url = new moodle_url("/blocks/reaction/export.php", $parameters);
+
                 $this->content->text .=
                     html_writer::div(get_string('plugin_switcher_course', 'block_reaction'), "settings-header")
                     . html_writer::start_tag("div",
@@ -86,6 +92,17 @@ class block_reaction extends block_base {
                             . html_writer::tag("button", "", array("class" => "btn-off", "type" => "button", "onclick" => "allTurnOff('" . $COURSE->id . "')"))
                         . html_writer::end_tag("div")
 
+                    . html_writer::end_tag("div")
+
+
+                    . html_writer::start_tag("div", array("class" => "reaction-link-wrapper"))
+                        . html_writer::start_tag("a",
+                            array(
+                                "class" => "get-statistics-button",
+                                "href" => $url
+                            ))
+                            . get_string('download_statistics', 'block_reaction')
+                        . html_writer::end_tag("a")
                     . html_writer::end_tag("div");
 
             } else {
