@@ -6,6 +6,7 @@ $string['block_title'] = 'Reaction';
 $string['plugin_switcher_course'] = 'Plugin switcher for all activities';
 $string['all_on'] = 'All on';
 $string['all_off'] = 'All off';
+$string['download_statistics'] = "Download statistics";
 
 // Module Block
 $string['plugin_switcher_module'] = 'Plugin switcher';
