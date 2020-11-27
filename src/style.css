@@ -73,6 +73,7 @@ input.mse-likes-dislikes-plugin[type="checkbox"] {
     width: 0;
     height: 0;
 
+    border: none;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
 }
