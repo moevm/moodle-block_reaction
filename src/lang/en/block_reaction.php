@@ -15,3 +15,13 @@ $string['off'] = 'OFF';
 $string['success_on'] = 'Plugin enabled in all modules';
 $string['success_off'] = 'Plugin disabled in all modules';
 $string['error'] = 'Error. Please, try again';
+
+//Statistic
+$string['course_statistic'] = 'Statistic of course';
+$string['activity_name'] = 'Activity name';
+$string['likes_count'] = 'Likes count';
+$string['dislikes_count'] = 'Dislikes count';
+$string['total'] = 'Total';
+$string['average'] = 'Average';
+$string['total_percent'] = 'Total, %';
+$string['average_percent'] = 'Average, %';

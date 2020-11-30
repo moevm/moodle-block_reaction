@@ -1,9 +1,9 @@
 <?php
 require_once(__DIR__ . '/../../../config.php');
-require_once($CFG->libdir . '/pdflib.php'); 
 require_once($CFG->dirroot . '/course/lib.php'); 
 
 $courseid = required_param('courseid', PARAM_INT);
+require_login($courseid);
 
 $exportcourse = get_course($courseid);
 $exportactivities = get_array_of_activities($courseid);
@@ -20,7 +20,7 @@ require_once($CFG->libdir . '/csvlib.class.php');
 
 $writer = new csv_export_writer();
 
-$writer->add_data(['Название активности', 'Количество лайков', 'Количество дизлайков']);
+$writer->add_data([get_string('activity_name', 'block_reaction'), get_string('likes_count', 'block_reaction'),  get_string('dislikes_count', 'block_reaction')]);
     
 $total_likes = 0;
 $total_likes_part = 0;
@@ -42,13 +42,13 @@ foreach($exportactivities as $activity) {
 
 $total = $total_likes + $total_dislikes; 
 
-$writer->add_data(['Всего', $total_likes, $total_dislikes]);
-$writer->add_data(['В среднем', count($exportactivities) ? round($total_likes / count($exportactivities), 2) : 0, 
+$writer->add_data([get_string('total', 'block_reaction'), $total_likes, $total_dislikes]);
+$writer->add_data([ get_string('average', 'block_reaction'), count($exportactivities) ? round($total_likes / count($exportactivities), 2) : 0, 
 count($exportactivities) ? round($total_dislikes / count($exportactivities), 2) : 0]);
 
-$writer->add_data(['Всего, %', ($total ? round($total_likes / $total * 100, 0) : 0) . '%', ($total ? round($total_dislikes / $total * 100, 0) : 0) . '%']);
+$writer->add_data([get_string('total_percent', 'block_reaction'), ($total ? round($total_likes / $total * 100, 0) : 0) . '%', ($total ? round($total_dislikes / $total * 100, 0) : 0) . '%']);
 
-$writer->add_data(['В среднем, %', (count($exportactivities) ? round($total_likes_part / count($exportactivities), 0) : 0) . '%', 
+$writer->add_data([get_string('average_percent', 'block_reaction'), (count($exportactivities) ? round($total_likes_part / count($exportactivities), 0) : 0) . '%', 
 (count($exportactivities) ? round($total_dislikes_part / count($exportactivities), 0) : 0) . '%']);
 
 $writer->download_file();

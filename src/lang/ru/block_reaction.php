@@ -15,3 +15,13 @@ $string['off'] = 'Выключить';
 $string['success_on'] = 'Плагин включен для всех активностей';
 $string['success_off'] = 'Плагин выключен для всех активностей';
 $string['error'] = 'Ошибка. Пожалуйста, попробуйте еще раз';
+
+//Statistic
+$string['course_statistic'] = 'Статистика курса';
+$string['activity_name'] = 'Название модуля';
+$string['likes_count'] = 'Количество лайков';
+$string['dislikes_count'] = 'Количество лайков';
+$string['total'] = 'Всего';
+$string['average'] = 'В среднем';
+$string['total_percent'] = 'Всего, %';
+$string['average_percent'] = 'В среднем, %';
