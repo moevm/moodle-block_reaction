@@ -8,4 +8,4 @@
 - [Презентация](https://github.com/moevm/mse_likes_and_dislikes_plugin/blob/master/%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D1%8D%D1%82%D0%B0%D0%BF_2.pdf)
 ## Третий этап
 - [Скринкаст](https://youtu.be/jpeUnlJuoF8)
-- [Презентация](https://docs.google.com/presentation/d/1vA31UM2Cc-aG8zHcbNLmXl1JNZvFUb7qluYndkdVVw8/edit#slide=id.p)
+- [Презентация](https://github.com/moevm/mse_likes_and_dislikes_plugin/blob/master/%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D1%8D%D1%82%D0%B0%D0%BF_3.pdf)
