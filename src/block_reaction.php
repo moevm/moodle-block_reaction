@@ -103,7 +103,9 @@ class block_reaction extends block_base {
                                 . html_writer::start_tag("a",
                                     array(
                                         "class" => "get-statistics-button",
-                                        "href" => $get_pdf_url
+                                        "href" => $get_pdf_url,
+                                        "target" => "_blank",
+                                        "rel" => "noopener noreferrer"
                                     ))
                                     . get_string('PDF', 'block_reaction')
                                 . html_writer::end_tag("a")
@@ -111,7 +113,9 @@ class block_reaction extends block_base {
                                 . html_writer::start_tag("a",
                                     array(
                                         "class" => "get-statistics-button",
-                                        "href" => $get_csv_url
+                                        "href" => $get_csv_url,
+                                        "target" => "_blank",
+                                        "rel" => "noopener noreferrer"
                                     ))
                                     . get_string('CSV', 'block_reaction')
                                 . html_writer::end_tag("a")
