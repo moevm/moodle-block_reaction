@@ -7,6 +7,8 @@ $string['plugin_switcher_course'] = 'Plugin switcher for all activities';
 $string['all_on'] = 'All on';
 $string['all_off'] = 'All off';
 $string['download_statistics'] = "Download statistics";
+$string['PDF'] = 'PDF';
+$string['CSV'] = 'CSV';
 
 // Module Block
 $string['plugin_switcher_module'] = 'Plugin switcher';

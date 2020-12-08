@@ -69,7 +69,8 @@ class block_reaction extends block_base {
                     "courseid" => $COURSE->id
                 ];
 
-                $url = new moodle_url("/blocks/reaction/export.php", $parameters);
+                $get_pdf_url = new moodle_url("/blocks/reaction/export/pdf.php", $parameters);
+                $get_csv_url = new moodle_url("/blocks/reaction/export/csv.php", $parameters);
 
                 $this->content->text .=
                     html_writer::div(get_string('plugin_switcher_course', 'block_reaction'), "settings-header")
@@ -96,13 +97,26 @@ class block_reaction extends block_base {
 
 
                     . html_writer::start_tag("div", array("class" => "reaction-link-wrapper"))
-                        . html_writer::start_tag("a",
-                            array(
-                                "class" => "get-statistics-button",
-                                "href" => $url
-                            ))
-                            . get_string('download_statistics', 'block_reaction')
-                        . html_writer::end_tag("a")
+                        . get_string('download_statistics', 'block_reaction')
+
+                            .html_writer::start_tag("div", array("class" => "reaction-links reactions-settings"))
+                                . html_writer::start_tag("a",
+                                    array(
+                                        "class" => "get-statistics-button",
+                                        "href" => $get_pdf_url
+                                    ))
+                                    . get_string('PDF', 'block_reaction')
+                                . html_writer::end_tag("a")
+
+                                . html_writer::start_tag("a",
+                                    array(
+                                        "class" => "get-statistics-button",
+                                        "href" => $get_csv_url
+                                    ))
+                                    . get_string('CSV', 'block_reaction')
+                                . html_writer::end_tag("a")
+                            .html_writer::end_tag("div")
+
                     . html_writer::end_tag("div");
 
             } else {

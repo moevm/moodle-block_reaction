@@ -7,6 +7,8 @@ $string['plugin_switcher_course'] = 'Включить/Выключить пла�
 $string['all_on'] = 'Включить';
 $string['all_off'] = 'Выключить';
 $string['download_statistics'] = "Скачать статистику";
+$string['PDF'] = 'PDF';
+$string['CSV'] = 'CSV';
 
 // Module Block
 $string['plugin_switcher_module'] = 'Включить/Выключить плагин для активности';
