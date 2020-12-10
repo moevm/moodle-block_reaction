@@ -1,5 +1,5 @@
 <?php
-// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - https://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,28 +12,34 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-require_once($CFG->libdir . '/externallib.php');
-require_once($CFG->dirroot . '/blocks/reaction/lib.php');
-require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
-
+// along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+ 
 /**
  * Reaction block
  *
- *
  * @package    block_reaction
+ * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+ 
 /**
  * block_reaction Class
  *
  *
  * @package    block_reaction
+ * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/blocks/reaction/lib.php');
+require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
+
 class block_reaction extends block_base {
     /**
      * Block initializations
+     *
+     * @throws coding_exception
      */
     public function init() {
 
@@ -41,6 +47,11 @@ class block_reaction extends block_base {
 
     }
     
+    /**
+     * Database initialisation
+     *
+     * @throws dml_exception
+     */
     public function instance_create() {
         global $COURSE, $DB;
         
@@ -51,6 +62,14 @@ class block_reaction extends block_base {
         }
     }
     
+    /**
+     * Content of Reaction block
+     *
+     * @return Object
+     * @throws dml_exception
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
     public function get_content() {
         global $USER, $COURSE, $DB;
     
@@ -171,6 +190,11 @@ class block_reaction extends block_base {
         return $this->content;
     }
     
+    /**
+     * Enable to add the block only in a course and modules
+     *
+     * @return array
+     */
     public function applicable_formats() {
         return array(
             'course-view' => true,
