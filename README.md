@@ -1,11 +1,6 @@
-# mse_likes_and_dislikes_plugin
-## Первый этап
-- [Скринкаст UI на заглушках](https://github.com/moevm/mse_likes_and_dislikes_plugin/issues/8#issuecomment-702088930)
-- [Макет UI](https://github.com/moevm/mse_likes_and_dislikes_plugin/issues/4#issuecomment-701549081)
-- [Структура БД](https://github.com/moevm/mse_likes_and_dislikes_plugin/issues/3#issuecomment-699081487)
-## Второй этап
-- [Инструкция по запуску](https://github.com/moevm/mse_likes_and_dislikes_plugin/wiki)
-- [Презентация](https://github.com/moevm/mse_likes_and_dislikes_plugin/blob/master/%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D1%8D%D1%82%D0%B0%D0%BF_2.pdf)
-## Третий этап
-- [Скринкаст](https://youtu.be/jpeUnlJuoF8)
-- [Презентация](https://github.com/moevm/mse_likes_and_dislikes_plugin/blob/master/%D0%BF%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D1%8D%D1%82%D0%B0%D0%BF_3.pdf)
+# Reactions
+This plugin allows users to express their reaction to a specific course module
+
+## Description
+
+The plugin adds a block that allows users to put likes and dislikes to any module. The function of disabling reactions for a separate module and the entire course is also supported. On the course page, the user can get statistics on it in pdf and csv format. The enable / disable and export functions are available only to users with course edit rights. After installation, the block will be added to all courses and modules in the system. When creating a new course or module, a block will also be automatically added to them.
