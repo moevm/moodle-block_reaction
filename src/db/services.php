@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * Web-services definitions
  *
@@ -21,6 +21,8 @@
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
 
 $functions = array(
         'mse_ld_set_reaction' => array(
@@ -76,5 +78,5 @@ $functions = array(
                 'type'        => 'write',
                 'ajax'        => 'true',
                 'services'    => [MOODLE_OFFICIAL_MOBILE_SERVICE],
-        )   
+        )
 );

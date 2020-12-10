@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * Web-service functions
  *
@@ -27,7 +27,7 @@
  * @param int $contextid Context ID
  * @param string $pagetypepattern Pattern of page type
  * @throws dml_exception
- */ 
+ */
 function add_block($contextid, $pagetypepattern) {
     global $DB;
 
@@ -36,7 +36,7 @@ function add_block($contextid, $pagetypepattern) {
     $blockinstance->parentcontextid = $contextid;
     $blockinstance->showinsubcontexts = false;
     $blockinstance->pagetypepattern = $pagetypepattern;
-    $blockinstance->subpagepattern = NULL;
+    $blockinstance->subpagepattern = null;
     $blockinstance->defaultregion = 'en';
     $blockinstance->defaultweight = 0;
     $blockinstance->configdata = '';
@@ -53,16 +53,16 @@ function add_block($contextid, $pagetypepattern) {
  * @param int $courseid Course ID
  * @param int $moduleid Module ID
  * @throws dml_exception
- */ 
+ */
 function init_module_block_settings($courseid, $moduleid) {
     global $DB;
-        
-    $moduleSettings = new stdClass();
-    $moduleSettings->moduleid = $moduleid;
-    $moduleSettings->courseid = $courseid;
-    $moduleSettings->visible = 1;
-    
-    $DB->insert_record("reactions_settings", $moduleSettings);
+
+    $modulesettings = new stdClass();
+    $modulesettings->moduleid = $moduleid;
+    $modulesettings->courseid = $courseid;
+    $modulesettings->visible = 1;
+
+    $DB->insert_record("reactions_settings", $modulesettings);
 }
 
 /**
@@ -72,9 +72,9 @@ function init_module_block_settings($courseid, $moduleid) {
  */
 function add_block_to_course($courseid) {
     global $DB;
-    
-    $course_context = context_course::instance($courseid);
-    add_block($course_context->id, 'course-view-*');
+
+    $coursecontext = context_course::instance($courseid);
+    add_block($coursecontext->id, 'course-view-*');
 }
 
 /**
@@ -82,11 +82,11 @@ function add_block_to_course($courseid) {
  * @param int $courseid Course ID
  * @param int $moduleid Module ID
  * @throws dml_exception
- */ 
+ */
 function add_block_to_module($courseid, $moduleid) {
     global $DB;
-    
-    $module_context = context_module::instance($moduleid);
-    add_block($module_context->id, 'mod-*');
+
+    $modulecontext = context_module::instance($moduleid);
+    add_block($modulecontext->id, 'mod-*');
     init_module_block_settings($courseid, $moduleid);
 }

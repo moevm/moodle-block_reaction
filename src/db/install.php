@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * On install function
  *
@@ -21,6 +21,8 @@
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/datalib.php');
 require_once($CFG->dirroot . '/blocks/reaction/lib.php');
@@ -34,8 +36,8 @@ function xmldb_block_reaction_install() {
     $courses = get_courses();
     foreach ($courses as $course) {
         add_block_to_course($course->id);
-        
-        $modules = course_modinfo::instance($course, 0)->get_cms();        
+
+        $modules = course_modinfo::instance($course, 0)->get_cms();
         foreach ($modules as $module) {
             add_block_to_module($course->id, $module->id);
         }

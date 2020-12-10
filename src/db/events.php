@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * Observers definitions
  *
@@ -22,16 +22,17 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $observers = array(
- 
+
     array(
         'eventname'   => '\core\event\course_created',
-        'callback'    => 'block_reaction_observer::course_created',
+        'callback'    => 'reaction_observer::course_created',
     ),
-    
+
     array(
         'eventname'   => '\core\event\course_module_created',
-        'callback'    => 'block_reaction_observer::course_module_created',
+        'callback'    => 'reaction_observer::course_module_created',
     )
-    
 );

@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * Web-service functions
  *
@@ -21,8 +21,8 @@
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
- /**
+
+/**
  * mse_ld_services Class
  *
  *
@@ -30,7 +30,8 @@
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
+defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->libdir . '/moodlelib.php');
 
@@ -58,22 +59,22 @@ class mse_ld_services extends external_api {
      * @return bool
      */
     public static function set_reaction($moduleid, $reaction) {
-        
+
         global $DB, $USER;
-        
-        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+
+        $module = $DB->get_record('course_modules', array('id' => $moduleid));
         $courseid = $module->course;
         require_login($courseid, true, $module);
-    
+
         if ($reaction < 2) {
             if ($DB->record_exists('reactions', ['userid' => $USER->id, 'moduleid' => $moduleid])) {
                 $DB->set_field('reactions', 'reaction', $reaction, ['userid' => $USER->id, 'moduleid' => $moduleid]);
             } else {
-                $reactionDatum = new stdClass();
-                $reactionDatum->moduleid   = $moduleid;
-                $reactionDatum->userid  = $USER->id;
-                $reactionDatum->reaction  = $reaction;
-                $reactionDatum->id = $DB->insert_record("reactions", $reactionDatum);
+                $reactiondatum = new stdClass();
+                $reactiondatum->moduleid   = $moduleid;
+                $reactiondatum->userid  = $USER->id;
+                $reactiondatum->reaction  = $reaction;
+                $reactiondatum->id = $DB->insert_record("reactions", $reactiondatum);
             }
         } else {
             $DB->delete_records('reactions', ['userid' => $USER->id, 'moduleid' => $moduleid]);
@@ -89,7 +90,7 @@ class mse_ld_services extends external_api {
     public static function set_reaction_returns() {
         return  new external_value(PARAM_BOOL, 'True if setting succesfull');
     }
-    
+
     /**
      * Returns description of get_reaction_parameters method parameters
      * @return external_function_parameters
@@ -107,17 +108,17 @@ class mse_ld_services extends external_api {
      * @return int 0-dislike, 1-like, else - noreaction
      */
     public static function get_reaction($moduleid) {
-        
+
         global $DB, $PAGE, $USER;
 
-        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+        $module = $DB->get_record('course_modules', array('id' => $moduleid));
         $courseid = $module->course;
         require_login($courseid, true, $module);
-        
-        $reactionDatum = $DB->get_record("reactions", ['userid' => $USER->id, 'moduleid' => $moduleid]);
-        
-        if ($reactionDatum) {
-            return $reactionDatum->reaction;
+
+        $reactiondatum = $DB->get_record("reactions", ['userid' => $USER->id, 'moduleid' => $moduleid]);
+
+        if ($reactiondatum) {
+            return $reactiondatum->reaction;
         } else {
             return 2;
         }
@@ -130,7 +131,7 @@ class mse_ld_services extends external_api {
     public static function get_reaction_returns() {
         return new external_value(PARAM_INT, 'reaction. 0 - dislike, 1 - like, 2 - undefined');
     }
-    
+
     /**
      * Returns description of get_total_reaction_parameters method parameters
      * @return external_function_parameters
@@ -148,11 +149,11 @@ class mse_ld_services extends external_api {
      * @return Object
      */
     public static function get_total_reaction($moduleid) {
-        
+
         global $USER;
         global $DB;
-        
-        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+
+        $module = $DB->get_record('course_modules', array('id' => $moduleid));
         $courseid = $module->course;
         require_login($courseid, true, $module);
 
@@ -175,7 +176,7 @@ class mse_ld_services extends external_api {
             )
         );
     }
-    
+
     /**
      * Returns description of toggle_module_reaction_visibility method parameters
      * @return external_function_parameters
@@ -185,7 +186,7 @@ class mse_ld_services extends external_api {
                 array('moduleid' => new external_value(PARAM_INT, 'Module id to disable reactions'))
         );
     }
-    
+
     /**
      * Set visibility setting
      * @param int $moduleid Module ID
@@ -193,28 +194,27 @@ class mse_ld_services extends external_api {
      * @return bool
      */
     public static function toggle_module_reaction_visibility($moduleid) {
-        
+
         global $DB, $PAGE;
-        
-        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+
+        $module = $DB->get_record('course_modules', array('id' => $moduleid));
         $courseid = $module->course;
         require_login($courseid, true, $module);
-        
+
         if (!$PAGE->user_allowed_editing()) {
             return false;
         }
-        
-        $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
-        
-        if ($moduleSettings) {
-            $visible = ($moduleSettings->visible + 1) % 2;
+
+        $modulesettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
+
+        if ($modulesettings) {
+            $visible = ($modulesettings->visible + 1) % 2;
             $DB->set_field('reactions_settings', 'visible', $visible, ['moduleid' => $moduleid]);
             return true;
         }
         return false;
-        
     }
-    
+
     /**
      * Returns description of toggle_module_reaction_visibility method result value
      * @return external_description
@@ -222,7 +222,7 @@ class mse_ld_services extends external_api {
     public static function toggle_module_reaction_visibility_returns() {
         return  new external_value(PARAM_BOOL, 'true if succesfull');
     }
-    
+
     /**
      * Returns description of get_module_reactions_visibility method parameters
      * @return external_function_parameters
@@ -232,25 +232,25 @@ class mse_ld_services extends external_api {
                 array('moduleid' => new external_value(PARAM_INT, 'Get module reactions visibility'))
         );
     }
-    
+
     /**
      * Get visibility setting for moduke
      * @param int $moduleid Module ID
      * @throws dml_exception
      * @return bool
      */
-    public static function get_module_reactions_visibility($moduleid) {        
+    public static function get_module_reactions_visibility($moduleid) {
         global $DB;
-        
-        $module = $DB->get_record('course_modules',array('id' =>$moduleid));
+
+        $module = $DB->get_record('course_modules', array('id' => $moduleid));
         $courseid = $module->course;
         require_login($courseid, true, $module);
-        
-        $moduleSettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
 
-        return $moduleSettings->visible;
+        $modulesettings = $DB->get_record('reactions_settings', ['moduleid' => $moduleid]);
+
+        return $modulesettings->visible;
     }
-    
+
     /**
      * Returns description of get_module_reactions_visibility method result value
      * @return external_description
@@ -258,7 +258,7 @@ class mse_ld_services extends external_api {
     public static function get_module_reactions_visibility_returns() {
         return  new external_value(PARAM_BOOL, 'false - invisible, true - visible');
     }
-    
+
     /**
      * Returns description of set_course_modules_reactions_visible method parameters
      * @return external_function_parameters
@@ -271,7 +271,7 @@ class mse_ld_services extends external_api {
                 )
         );
     }
-    
+
     /**
      * Set visibility setting for every module in course
      * @param int $courseid Course ID
@@ -280,19 +280,19 @@ class mse_ld_services extends external_api {
      * @return bool
      */
     public static function set_course_modules_reactions_visible($courseid, $visible) {
-        
+
         global $DB, $PAGE;
-        
+
         require_login($courseid);
         if (!$PAGE->user_allowed_editing()) {
             return false;
         }
-        
+
         $DB->set_field('reactions_settings', 'visible', $visible, ['courseid' => $courseid]);
         return true;
-        
+
     }
-    
+
     /**
      * Returns description of set_course_modules_reactions_visible method result value
      * @return external_description
@@ -300,5 +300,4 @@ class mse_ld_services extends external_api {
     public static function set_course_modules_reactions_visible_returns() {
         return  new external_value(PARAM_BOOL, 'true if succesfull');
     }
-    
 }

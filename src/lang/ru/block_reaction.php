@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * Reaction block
  *
@@ -21,11 +21,11 @@
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
 $string['pluginname'] = 'Обратная связь';
 $string['block_title'] = 'Управление плагином "Обратная связь"';
 
-// Course Block
+/* Course Block */
 $string['plugin_switcher_course'] = 'Включить/Выключить плагин для всего курса';
 $string['all_on'] = 'Включить';
 $string['all_off'] = 'Выключить';
@@ -33,7 +33,7 @@ $string['download_statistics'] = "Скачать статистику";
 $string['PDF'] = 'PDF';
 $string['CSV'] = 'CSV';
 
-// Module Block
+/* Module Block */
 $string['plugin_switcher_module'] = 'Включить/Выключить плагин для активности';
 $string['on'] = 'Включить';
 $string['off'] = 'Выключить';
@@ -41,7 +41,7 @@ $string['success_on'] = 'Плагин включен для всех актив�
 $string['success_off'] = 'Плагин выключен для всех активностей';
 $string['error'] = 'Ошибка. Пожалуйста, попробуйте еще раз';
 
-//Statistic
+/* Statistic */
 $string['course_statistic'] = 'Статистика курса';
 $string['activity_name'] = 'Название модуля';
 $string['likes_count'] = 'Количество лайков';

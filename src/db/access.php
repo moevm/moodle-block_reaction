@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
- 
+
 /**
  * Capabilities definitions
  *
@@ -22,28 +22,30 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $capabilities = array(
- 
+
     'block/reaction:myaddinstance' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
         'archetypes' => array(
             'user' => CAP_ALLOW
         ),
- 
+
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
     ),
- 
+
     'block/reaction:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
- 
+
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
- 
+
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 );
