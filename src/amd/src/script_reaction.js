@@ -1,3 +1,8 @@
+/* 
+ * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 define(['jquery', 'core/ajax'], function($, ajax) {
     return {
         init: function(env) {
