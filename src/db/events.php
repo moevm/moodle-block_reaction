@@ -28,11 +28,11 @@ $observers = array(
 
     array(
         'eventname'   => '\core\event\course_created',
-        'callback'    => 'reaction_observer::course_created',
+        'callback'    => '\block_reaction\observer::course_created',
     ),
 
     array(
         'eventname'   => '\core\event\course_module_created',
-        'callback'    => 'reaction_observer::course_module_created',
+        'callback'    => '\block_reaction\observer::course_module_created',
     )
 );

@@ -31,7 +31,9 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class reaction_observer {
+namespace block_reaction;
+
+class observer {
 
     /**
      * On new course created - add block
