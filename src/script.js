@@ -1,3 +1,8 @@
+/* 
+ * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 function likeClicked(ajax, moduleID) {
 
     /* user set like*/
