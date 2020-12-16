@@ -22,19 +22,17 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->libdir . '/moodlelib.php');
+
 /**
  * mse_ld_services Class
- *
  *
  * @package    block_reaction
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-require_once($CFG->libdir . '/externallib.php');
-require_once($CFG->libdir . '/moodlelib.php');
-
 class mse_ld_services extends external_api {
 
 

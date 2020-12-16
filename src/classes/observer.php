@@ -22,17 +22,15 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_reaction;
+
 /**
- * reaction_observer Class
- *
+ * observer Class
  *
  * @package    block_reaction
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace block_reaction;
-
 class observer {
 
     /**
