@@ -22,6 +22,12 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
+require_once($CFG->libdir . '/externallib.php');
+require_once($CFG->dirroot . '/blocks/reaction/lib.php');
+require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
+
 /**
  * block_reaction Class
  *
@@ -30,13 +36,6 @@
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-require_once($CFG->libdir . '/externallib.php');
-require_once($CFG->dirroot . '/blocks/reaction/lib.php');
-require_once($CFG->dirroot . '/blocks/reaction/externallib.php');
-
 class block_reaction extends block_base {
     /**
      * Block initializations

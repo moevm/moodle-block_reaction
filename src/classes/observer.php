@@ -22,22 +22,22 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_reaction;
+
 /**
- * reaction_observer Class
- *
+ * observer Class
  *
  * @package    block_reaction
  * @copyright  2020 Konstantin Grishin, Anna Samoilova, Maxim Udod, Ivan Grigoriev, Dmitry Ivanov
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace block_reaction;
-
 class observer {
 
     /**
      * On new course created - add block
      * @param Object $event Event object
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public static function course_created($event) {
         global $PAGE;
@@ -57,6 +57,8 @@ class observer {
     /**
      * On new module created - add block
      * @param Object $event Event object
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public static function course_module_created($event) {
         global $PAGE;

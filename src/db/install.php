@@ -29,9 +29,10 @@ require_once($CFG->dirroot . '/blocks/reaction/lib.php');
 
 /**
  * Add block to every course and module in system
+ * @throws dml_exception
  */
 function xmldb_block_reaction_install() {
-    global $PAGE, $DB;
+    global $DB;
 
     $courses = get_courses();
     foreach ($courses as $course) {
