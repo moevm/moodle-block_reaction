@@ -54,6 +54,9 @@ class mse_ld_services extends external_api {
      * @param int $moduleid Module ID
      * @param int $reaction 0 - dislike, 1 - like, else - no reaction
      * @throws dml_exception
+     * @throws coding_exception
+     * @throws require_login_exception
+     * @throws moodle_exception
      * @return bool
      */
     public static function set_reaction($moduleid, $reaction) {
@@ -103,6 +106,9 @@ class mse_ld_services extends external_api {
      * Get user reaction
      * @param int $moduleid Module ID
      * @throws dml_exception
+     * @throws coding_exception
+     * @throws require_login_exception
+     * @throws moodle_exception
      * @return int 0-dislike, 1-like, else - noreaction
      */
     public static function get_reaction($moduleid) {
@@ -144,6 +150,9 @@ class mse_ld_services extends external_api {
      * Get reaction for module
      * @param int $moduleid Module ID
      * @throws dml_exception
+     * @throws coding_exception
+     * @throws require_login_exception
+     * @throws moodle_exception
      * @return Object
      */
     public static function get_total_reaction($moduleid) {
@@ -189,6 +198,9 @@ class mse_ld_services extends external_api {
      * Set visibility setting
      * @param int $moduleid Module ID
      * @throws dml_exception
+     * @throws coding_exception
+     * @throws require_login_exception
+     * @throws moodle_exception
      * @return bool
      */
     public static function toggle_module_reaction_visibility($moduleid) {
@@ -235,6 +247,9 @@ class mse_ld_services extends external_api {
      * Get visibility setting for moduke
      * @param int $moduleid Module ID
      * @throws dml_exception
+     * @throws coding_exception
+     * @throws require_login_exception
+     * @throws moodle_exception
      * @return bool
      */
     public static function get_module_reactions_visibility($moduleid) {
@@ -275,6 +290,9 @@ class mse_ld_services extends external_api {
      * @param int $courseid Course ID
      * @param int $visible 0 - invisible, 1 - visible
      * @throws dml_exception
+     * @throws coding_exception
+     * @throws require_login_exception
+     * @throws moodle_exception
      * @return bool
      */
     public static function set_course_modules_reactions_visible($courseid, $visible) {

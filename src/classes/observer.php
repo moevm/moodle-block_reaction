@@ -36,6 +36,8 @@ class observer {
     /**
      * On new course created - add block
      * @param Object $event Event object
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public static function course_created($event) {
         global $PAGE;
@@ -55,6 +57,8 @@ class observer {
     /**
      * On new module created - add block
      * @param Object $event Event object
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public static function course_module_created($event) {
         global $PAGE;
