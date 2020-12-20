@@ -28,4 +28,4 @@ $plugin->component = 'block_reaction';
 $plugin->version   = 2020121001;
 $plugin->requires  = 2017051502;
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v0.1';
+$plugin->release = 'v1.0';
