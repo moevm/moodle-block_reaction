@@ -83,7 +83,7 @@ class block_reaction extends block_base {
 
         /* Build block */
         if ($this->page->user_is_editing()) {
-
+            debugging('BLOCK-REACTION: user is editing page');
             if (is_null($this->page->cm)) {
 
                 $parameters = [

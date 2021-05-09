@@ -6,6 +6,7 @@
 define(['jquery', 'core/ajax'], function($, ajax) {
     return {
         init: function(env) {
+            console.log("We init plugin reaction")
             console.log(env)
             /* include stylesheet */
             $('head').append('<link rel="stylesheet" type="text/css" href="style.css">');
@@ -18,7 +19,8 @@ define(['jquery', 'core/ajax'], function($, ajax) {
                 /*get values likes and dislikes count */
                 let likesCount = env.total_reaction.likes;
                 let dislikesCount = env.total_reaction.dislikes;
-
+                console.log(`likesCount = ${env.total_reaction.likes}`)
+                console.log(`dislikesCount = ${env.total_reaction.dislikes}`)
                 /* build plugin interface */
                 let wrapper = $('<div class="mse-likes-dislikes-plugin plugin-wrapper">');
                 let ui = $('<div class="mse-likes-dislikes-plugin likes-dislikes-plugin-ui">');
